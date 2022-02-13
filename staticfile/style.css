@@ -1,0 +1,31 @@
+*
+{
+    margin-right: 0;
+    padding-right: 0;
+}
+
+body
+{
+    margin-left: 3px;
+    margin-top: 3px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+div
+{
+    border-radius: 3px;
+    background-color: rgb(228, 228, 228);
+    width: 13px;
+    height: 13px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    transition: 0.4s;
+
+}
+
+div:hover
+{
+    border-radius: 6px;
+    background-color: rgb(245, 133, 133);
+}
