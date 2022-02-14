@@ -1,43 +1,46 @@
-
+const numBlock = 3906;
 const socket = io();
 
-let b = document.querySelector('body');
-let a = [];
+let body = document.querySelector('body');
+let newUserConnectionMsg = document.querySelector('#newUser');
+let submitNameButton = document.querySelector('#nameSubmit');
+let name = document.querySelector('#nameInput');
+let newUserClick = document.querySelector('#logMess'); 
+let block = [];
 
-for(let i = 0; i < 4998; i++)
+let userName;
+
+for(let i = 0; i < numBlock; i++)
 {
-    a[i] = document.createElement('div');
-    b.appendChild(a[i]);
+    block[i] = document.createElement('div');
+    body.appendChild(block[i]);
 }
 
-console.log(window.innerHeight)
-console.log(window.innerWidth)
-
-for(let i = 0; i < 4998; i++)
+for(let i = 0; i < numBlock; i++)
 {
-    a[i].onclick = () => {
+    block[i].onclick = () => {
         
-        if(a[i].style.background == 'rgb(31, 78, 52)')
+        if(block[i].style.background == 'rgb(31, 78, 52)')
         {
-            socket.emit('clickFalse', i)
+            socket.emit('clickFalse', i, userName)
         }
         else
         {
-            socket.emit('clickTrue', i)
+            socket.emit('clickTrue', i, userName)
         }
     }
 }
 
 socket.on('updata', function(bitField){
-    for(let i = 0; i < 4998; i++)
+    for(let i = 0; i < numBlock; i++)
     {
         if(bitField[i])
         {
-            a[i].style.background = 'rgb(31, 78, 52)'
+            block[i].style.background = 'rgb(31, 78, 52)'
         }
         else
         {
-            a[i].style.background = 'rgb(228, 228, 228)'
+            block[i].style.background = 'rgb(228, 228, 228)'
         }
     }
 })
@@ -45,10 +48,40 @@ socket.on('updata', function(bitField){
 socket.on('broadcast',function(x, state) {
     if(state)
     {
-        a[x].style.background = 'rgb(31, 78, 52)';
+        block[x].style.background = 'rgb(31, 78, 52)';
     }
     else
     {
-        a[x].style.background = 'rgb(228, 228, 228)';
+        block[x].style.background = 'rgb(228, 228, 228)';
     }
  });
+
+socket.on('newUser', function(name){
+    newUserConnectionMsg.innerHTML = "New user " + name + " connected";
+    newUserConnectionMsg.style.opacity = '1';
+    setTimeout(() => {
+        newUserConnectionMsg.style.opacity = '0';
+    }, 3000)
+})
+
+socket.on('nameSet', function(){
+    submitNameButton.onclick = () => {
+        if(name.value)
+        {
+            userName = name.value;
+            console.log(userName);
+            socket.emit('newNameSet', userName);
+            name.value = "";
+            name.placeholder = "";
+        }
+    }
+})
+
+socket.on('userAction', function(ActName, block)
+{
+    newUserClick.innerHTML = "User " + ActName + " clicked on block " + (block+1)
+    newUserClick.style.opacity = '1';
+    setTimeout(() => {
+        newUserClick.style.opacity = '0';
+    }, 3000)
+})
