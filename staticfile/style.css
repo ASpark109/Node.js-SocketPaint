@@ -6,8 +6,12 @@
 
 body
 {
-    margin-left: 3px;
-    margin-top: 3px;
+    margin: auto;
+    
+    margin-top: 30px;
+    padding: 20px;
+    width: 1400px;
+    height: 600px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -20,7 +24,7 @@ div
     height: 13px;
     margin-right: 2px;
     margin-bottom: 2px;
-    transition: 0.4s;
+    transition: 0.2s;
 
 }
 
@@ -28,4 +32,51 @@ div:hover
 {
     border-radius: 6px;
     background-color: rgb(245, 133, 133);
+}
+
+#newUser
+{
+    position: absolute;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    left: 43%;
+    text-align: center;
+    margin-top: -45px;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+#nameInput
+{
+    position: absolute;
+    bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+    left: 40%;
+    width: 140px;
+    height: 20px;
+}
+
+#nameSubmit
+{
+    position: absolute;
+    bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+    left: 50%;
+    height: 25px;
+    width: 70px;
+    text-align: center;
+}
+
+#logMess
+{
+    position: absolute;
+    bottom: 0px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    left: 65%;
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    opacity: 0;
+    transition: 0.5s;
 }
